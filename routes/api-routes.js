@@ -3,13 +3,12 @@ const router = express.Router()
 const db = require('../models')
 
 router.get('/api/todos', async (req, res) => {
-    try {
-        const todos = await db.Todo.findAll()
-        res.json(todos)
-
-    } catch(err) {
-        res.status(500).send(err)
-      }
+  try {
+    const todos = await db.Todo.findAll()
+    res.json(todos)
+  } catch(err) {
+    res.status(500).send(err)
+  }
 })
 
 router.post('/api/todos', async (req, res) => {
@@ -21,21 +20,31 @@ router.post('/api/todos', async (req, res) => {
   }
 })
 
-// router.put()
+router.put('/api/todos/:id', async (req, res) => {
+  try {
+    const id = req.params.id
 
-router.delete('/api/todos/:id', async (req, res) => {
-    try {
-        const id = req.params.id 
-        await db.Todo.destroy({
-            where: {id}
-        })
-        res.status(200).send()
+    console.log(req.body)
 
-    } catch(err){
-        res.status(500).send(err)
-    }
+    await db.Todo.update(req.body, {
+      where: { id }
+    })
+    res.status(200).send()
+  } catch(err) {
+    res.status(500).send(err)
+  }
 })
 
-
+router.delete('/api/todos/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    await db.Todo.destroy({
+      where: { id }
+    })
+    res.status(200).send()
+  } catch(err) {
+    res.status(500).send(err)
+  }
+})
 
 module.exports = router

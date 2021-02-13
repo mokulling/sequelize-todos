@@ -29,6 +29,10 @@ input.new-item:focus {
   margin-left: 5px;
 }
 
+.line-through {
+  text-decoration: line-through;
+}
+
 .edit {
   width: 100%;
 }
