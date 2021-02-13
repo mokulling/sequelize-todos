@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('./models')
-const PORT = 3000
 const routes = require('./routes/api-routes.js')
+const PORT = 3000
 
 const app = express()
 
